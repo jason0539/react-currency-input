@@ -71,16 +71,16 @@ export default function mask(value, precision = 2, decimalSeparator = '.', thous
         digits.splice(x, 0, thousandSeparator);
     }
 
-    // if we have a prefix or suffix, add them in.
-    if (prefix.length > 0) { digits.unshift(prefix); }
-    if (suffix.length > 0) { digits.push(suffix); }
-
     // if the number is negative, insert a "-" to
     // the front of the array and negate the raw value
     if (allowNegative && numberIsNegative) {
         digits.unshift('-');
         raw = -raw;
     }
+
+    // if we have a prefix or suffix, add them in.
+    if (prefix.length > 0) { digits.unshift(prefix); }
+    if (suffix.length > 0) { digits.push(suffix); }
 
     return {
         value: raw,

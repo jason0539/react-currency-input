@@ -93,6 +93,7 @@ class CurrencyInput extends Component {
             props.decimalSeparator,
             props.thousandSeparator,
             props.allowNegative,
+            props.allowZeroNegative,
             props.prefix,
             props.suffix
         );
@@ -207,15 +208,18 @@ class CurrencyInput extends Component {
      */
     handleChange(event) {
         event.preventDefault();
+        // console.log(`event.target.value is ${event.target.value}`);
         let { maskedValue, value } = mask(
             event.target.value,
             this.props.precision,
             this.props.decimalSeparator,
             this.props.thousandSeparator,
             this.props.allowNegative,
+            this.props.allowZeroNegative,
             this.props.prefix,
             this.props.suffix
         );
+        // console.log(`maskedValue is ${maskedValue},value is ${value}`);
 
         event.persist();  // fixes issue #23
 
@@ -284,6 +288,7 @@ CurrencyInput.propTypes = {
     precision: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     inputType: PropTypes.string,
     allowNegative: PropTypes.bool,
+    allowZeroNegative: PropTypes.bool,
     allowEmpty: PropTypes.bool,
     prefix: PropTypes.string,
     suffix: PropTypes.string,
@@ -301,6 +306,7 @@ CurrencyInput.defaultProps = {
     precision: '2',
     inputType: 'text',
     allowNegative: false,
+    allowZeroNegative:true,
     prefix: '',
     suffix: '',
     selectAllOnFocus: false
